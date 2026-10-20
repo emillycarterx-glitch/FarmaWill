@@ -8,11 +8,18 @@ from flask import Flask
 from google import genai
 from google.genai import types
 
-# 1. CHAVES E CONFIGURAÇÕES SECRETAS
-# Agora o código puxa as senhas do cofre do Render
-import os
+# 1. CHAVES E CONFIGURAÇÕES (Com Alarme Anti-Crash)
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+
+# Alarme para avisar exatamente qual senha o Render "esqueceu"
+if not TELEGRAM_TOKEN or not GEMINI_API_KEY:
+    print("❌ ERRO FATAL: As senhas não estão chegando do cofre do Render!")
+    print(f"-> Telegram Token encontrado no Render? {'✅ SIM' if TELEGRAM_TOKEN else '❌ NÃO'}")
+    print(f"-> Gemini API Key encontrada no Render? {'✅ SIM' if GEMINI_API_KEY else '❌ NÃO'}")
+    print("Por favor, vá na aba 'Environment', adicione as variáveis e clique em 'Manual Deploy'.")
+    import sys
+    sys.exit(1) # Trava o sistema suavemente para você ler o log
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 client = genai.Client(api_key=GEMINI_API_KEY)
