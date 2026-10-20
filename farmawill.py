@@ -112,7 +112,8 @@ def responder_mensagem(mensagem):
              bot.send_message(mensagem.chat.id, texto_farmawill)
 
     except Exception as e:
-        bot.send_message(mensagem.chat.id, "Ocorreu um erro técnico.")
+        print(f"ERRO NO PROCESSAMENTO: {e}")
+        bot.send_message(mensagem.chat.id, f"Ocorreu um erro técnico: {e}")
 
 # LIGA TUDO: O site fantasma e o robô
 print("Iniciando o Servidor Fantasma e o Telegram...")
