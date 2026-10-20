@@ -73,7 +73,7 @@ def responder_mensagem(mensagem):
             conteudos_para_ia.append(audio_part)
             
             resposta_transcricao = client.models.generate_content(
-                model='gemini-3.5-flash',
+                model='gemini-3.8-flash',
                 contents=[audio_part, "Transcreva exatamente o que foi dito neste áudio."]
             )
             texto_usuario = resposta_transcricao.text.strip()
@@ -99,7 +99,7 @@ def responder_mensagem(mensagem):
         conteudos_para_ia.append(prompt)
 
         resposta_final_ia = client.models.generate_content(
-            model='gemini-3.5-flash',
+            model='gemini-3.8-flash',
             contents=conteudos_para_ia
         )
         texto_farmawill = resposta_final_ia.text
