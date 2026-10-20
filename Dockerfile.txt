@@ -1,0 +1,15 @@
+FROM python:3.10-slim
+
+# Instalar o ffmpeg (Necessário para áudios no Telegram às vezes)
+RUN apt-get update && apt-get install -y ffmpeg
+
+WORKDIR /app
+
+# Copiar tudo da tua pasta para o servidor
+COPY . /app
+
+# Instalar as ferramentas
+RUN pip install --no-cache-dir -r requirements.txt
+
+# O comando para ligar o FarmaWill
+CMD ["python", "farmawill.py"]
