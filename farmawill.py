@@ -8,9 +8,11 @@ from flask import Flask
 from google import genai
 from google.genai import types
 
-# 1. CHAVES E CONFIGURAÇÕES
-TELEGRAM_TOKEN = "8710361844:AAEmxd-8WYAmO410jJvLLs5ePfTWTDRS_ew"
-GEMINI_API_KEY = "AIzaSyBrbElh7TqTAiAi23G2kU7j-6cR7r0jCO8"
+# 1. CHAVES E CONFIGURAÇÕES SECRETAS
+# Agora o código puxa as senhas do cofre do Render
+import os
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 client = genai.Client(api_key=GEMINI_API_KEY)
